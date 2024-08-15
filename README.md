@@ -1,6 +1,4 @@
-CRUD para Pollo Pinulito
-
-Script de la tabla utilizada
+Estoy usando el usuario de nose para esto 
 
 ```SQL
 CREATE TABLE tbProductos(

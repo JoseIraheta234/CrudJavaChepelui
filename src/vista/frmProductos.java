@@ -51,7 +51,7 @@ public class frmProductos extends javax.swing.JFrame {
         btnLimpiar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProducto = new javax.swing.JScrollPane();
         jtbProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,9 +112,9 @@ public class frmProductos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtbProductos);
+        tbProducto.setViewportView(jtbProductos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 720, 230));
+        jPanel1.add(tbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 720, 230));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,8 +186,8 @@ public class frmProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable jtbProductos;
+    private javax.swing.JScrollPane tbProducto;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtCategoria;
     public javax.swing.JTextField txtNombre;

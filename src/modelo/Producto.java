@@ -5,6 +5,7 @@ import java.util.UUID;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import vista.frmProductos;
 
 public class Producto {
     //1- Parametros
@@ -94,5 +95,84 @@ public class Producto {
             System.out.println("Este es el error en el modelo, metodo mostrar " + e);
         }
     }
+    
+    
+     public void Eliminar(JTable tabla) {
+        //Creamos una variable igual a ejecutar el método de la clase de conexión
+        Connection conexion = ClaseConexion.getConexion();
+
+        //obtenemos que fila seleccionó el usuario
+        int filaSeleccionada = tabla.getSelectedRow();
+        //Obtenemos el id de la fila seleccionada
+
+        String miId = tabla.getValueAt(filaSeleccionada, 0).toString();
+        //borramos 
+        try {
+            String sql = "delete from tbProductos where UUID_producto = ?";
+            PreparedStatement deleteEstudiante = conexion.prepareStatement(sql);
+            deleteEstudiante.setString(1, miId);
+            deleteEstudiante.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("este es el error metodo de eliminar" + e);
+        }
+    }
+     
+     
+   public void Actualizar(JTable tabla) {
+        //Creamos una variable igual a ejecutar el método de la clase de conexión
+        Connection conexion = ClaseConexion.getConexion();
+
+        //obtenemos que fila seleccionó el usuario
+        int filaSeleccionada = tabla.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+            //Obtenemos el id de la fila seleccionada
+            String miUUId = tabla.getValueAt(filaSeleccionada, 0).toString();
+
+            try {
+                //Ejecutamos la Query
+                String sql = "update tbProductos set nombre= ?, precio = ?, categoria = ? where UUID_producto = ?";
+                PreparedStatement updateUser = conexion.prepareStatement(sql);
+
+                updateUser.setString(1, getNombre());
+                updateUser.setDouble(2, getPrecio());
+                updateUser.setString(3, getCategoria());
+                updateUser.setString(4, miUUId);
+                updateUser.executeUpdate();
+
+            } catch (Exception e) {
+                System.out.println("este es el error en el metodo de actualizar" + e);
+            }
+        } else {
+            System.out.println("no");
+        }
+    }
+   
+  
+     public void limpiar(frmProductos vista) {
+        vista.txtNombre.setText("");
+        vista.txtPrecio.setText("");
+        vista.txtCategoria.setText("");
+    }
+
+    public void cargarDatosTabla(frmProductos vista) {
+        // Obtén la fila seleccionada 
+        int filaSeleccionada = vista.jtbProductos.getSelectedRow();
+
+        // Debemos asegurarnos que haya una fila seleccionada antes de acceder a sus valores
+        if (filaSeleccionada != -1) {
+            String UUIDDeTb = vista.jtbProductos.getValueAt(filaSeleccionada, 0).toString();
+            String NombreDeTB = vista.jtbProductos.getValueAt(filaSeleccionada, 1).toString();
+            String EdadDeTb = vista.jtbProductos.getValueAt(filaSeleccionada, 2).toString();
+            String EspecialidadDeTB = vista.jtbProductos.getValueAt(filaSeleccionada, 3).toString();
+
+            // Establece los valores en los campos de texto
+            vista.txtNombre.setText(NombreDeTB);
+            vista.txtPrecio.setText(EdadDeTb);
+            vista.txtCategoria.setText(EspecialidadDeTB);
+        }
+    }
+   
+
 
 }

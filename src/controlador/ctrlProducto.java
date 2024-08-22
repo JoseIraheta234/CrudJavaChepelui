@@ -2,6 +2,7 @@ package controlador;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import modelo.Producto;
 import vista.frmProductos;
 
@@ -21,6 +22,15 @@ public class ctrlProducto implements MouseListener{
         
         vista.jtbProductos.addMouseListener(this);
         modelo.Mostrar(vista.jtbProductos);
+        
+        vista.btnEliminar.addMouseListener(this);
+        vista.jtbProductos.addMouseListener(this);
+        
+        vista.btnActualizar.addMouseListener(this);
+        
+        vista.btnLimpiar.addMouseListener(this);
+        
+    
     }
 
     @Override
@@ -32,7 +42,43 @@ public class ctrlProducto implements MouseListener{
           
           modelo.Guardar();
           modelo.Mostrar(vista.jtbProductos);
+         
       }
+      
+      
+    if (e.getSource() == vista.btnEliminar) {
+            
+                modelo.Eliminar(vista.jtbProductos);
+                modelo.Mostrar(vista.jtbProductos);
+                
+      
+            
+        }
+    
+    if (e.getSource() == vista.btnActualizar) {
+            
+            
+                    //Asignar lo de la vista al modelo al momento de darle clic a actualizar
+                    modelo.setNombre(vista.txtNombre.getText());
+                    modelo.setPrecio(Double.parseDouble(vista.txtPrecio.getText()));
+                    modelo.setCategoria(vista.txtCategoria.getText());
+
+                    //Ejecutar el método    
+                    modelo.Actualizar(vista.jtbProductos);
+                    modelo.Mostrar(vista.jtbProductos);
+                    
+              
+            
+        }
+    
+       if (e.getSource() == vista.btnLimpiar) {
+            modelo.limpiar(vista);
+        }
+
+        if (e.getSource() == vista.jtbProductos) {
+            modelo.cargarDatosTabla(vista);
+        }
+       
     }
    
 
